@@ -29,13 +29,8 @@ class PuppeteerConnectionDelegate extends ConnectionDelegate
      */
     async handleInstruction(instruction, responseHandler, errorHandler) {
         const StealthPlugin = require('puppeteer-extra-plugin-stealth');
-        instruction.setDefaultResource(puppeteer);
-
-        ["chrome.runtime", "navigator.languages"].forEach(a =>
-            StealthPlugin.enabledEvasions.delete(a)
-        );
-
         puppeteer.use(StealthPlugin());
+        instruction.setDefaultResource(puppeteer);
 
         let value = null;
 
